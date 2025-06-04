@@ -221,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
     <script src="../../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../../../login.js"></script>
-    <script src="quiz.js"></script>
+    <script src="2021A_FE.js"></script>
 </body>
 
 </html>

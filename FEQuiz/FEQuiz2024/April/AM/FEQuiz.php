@@ -274,7 +274,7 @@ $enableTimer = isset($_GET['enableTimer']) ? $_GET['enableTimer'] : '0';
             </div>
         </div>
     </footer>
-    <script src="quiz.js"></script>
+    <script src="2024S_FE_AM.js"></script>
     <script src="../../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../../../login.js"></script>
 
