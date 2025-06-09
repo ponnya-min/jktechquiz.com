@@ -1,6 +1,22 @@
 <?php
 require("config.php");
 session_start();
+
+if (isset($_GET['username'])) {
+    $username = $_GET['username'];
+    
+    // Fetch the user from database using $username
+    // Example:
+    // $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+    // $stmt->execute([$username]);
+    // $user = $stmt->fetch();
+
+    echo "Showing results for: " . htmlspecialchars($username);
+} else {
+    echo "No user selected.";
+}
+
+
 // Check if the user is logged in
 $isLoggedIn = $_SESSION['user_id'];
 

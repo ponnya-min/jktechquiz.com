@@ -28,6 +28,7 @@ $totalPages = ceil($totalRows / $perPage);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../style/admin.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -41,8 +42,7 @@ $totalPages = ceil($totalRows / $perPage);
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item px-2"><a class="nav-link" href="adminRole.php"><i class="fa-solid fa-user-tie"></i> Admin</a></li>
-                <li class="nav-item px-2"><a class="nav-link" href="index.php"><i class="fa-solid fa-user"></i> User</a></li>
-                <li class="nav-item px-2"><a class="nav-link" href="result.php"><i class="fa-solid fa-ranking-star"></i> Result</a></li>
+                <li class="nav-item px-2"><a class="nav-link" href="index.php"><i class="fa-solid fa-user"></i> User</a></li>  
                 <li class="nav-item px-2"><a class="nav-link" href="comment.php"><i class="fa-solid fa-comment"></i> Comment</a></li>
             </ul>
             <a class="btn btn-danger" href="logout.php">Logout</a>
@@ -63,23 +63,23 @@ $totalPages = ceil($totalRows / $perPage);
     <div class="table-responsive">
         <?php if (mysqli_num_rows($result) > 0): ?>
             <table class="table table-striped table-bordered">
-                <thead class="table-dark">
+                <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Action</th>
+                        <th class="table_title text-center">No</th>
+                        <th class="table_title text-center">Username</th>
+                        <th class="table_title text-center">Email</th>
+                        <th class="table_title text-center">Role</th>
+                        <th class="table_title text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $rowNumber = $offset + 1; ?>
                     <?php while ($row = mysqli_fetch_assoc($result)): ?>
                         <tr id="row<?= $row['id'] ?>">
-                            <td><?= $rowNumber++ ?></td>
-                            <td><?= htmlspecialchars($row['name']) ?></td>
-                            <td><?= htmlspecialchars($row['email']) ?></td>
-                            <td>
+                            <td class="text-center"><?= $rowNumber++ ?></td>
+                            <td class="text-center"><?= htmlspecialchars($row['name']) ?></td>
+                            <td class="text-center"><?= htmlspecialchars($row['email']) ?></td>
+                            <td class="text-center">
                                 <select class="form-select roleSelect"
                                         data-id="<?= $row['id'] ?>"
                                         data-previous="<?= $row['role'] ?>"
@@ -88,7 +88,7 @@ $totalPages = ceil($totalRows / $perPage);
                                     <option value="admin" <?= ($row['role'] == "admin") ? 'selected' : '' ?>>Admin</option>
                                 </select>
                             </td>
-                            <td>
+                            <td  class="text-center">
                                 <button class="btn btn-danger"
                                         onclick="confirmDelete(<?= $row['id'] ?>)"
                                         <?= ($row['id'] == 1) ? 'disabled' : '' ?>>

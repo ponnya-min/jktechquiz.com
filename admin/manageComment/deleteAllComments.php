@@ -1,18 +1,14 @@
 <?php
 require("../../config.php");
 
-$sql = "DELETE FROM feedback";
-$stmt = $conn->prepare($sql);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-if ($stmt) {
-    if ($stmt->execute()) {
-        echo "success";
-    } else {
-        echo "error: " . htmlspecialchars($stmt->error);
-    }
-    $stmt->close();
+$sql = "DELETE FROM feedback";
+if ($conn->query($sql) === TRUE) {
+    echo "success";
 } else {
-    echo "error: " . htmlspecialchars($conn->error);
+    echo "error: " . $conn->error;
 }
 
 $conn->close();

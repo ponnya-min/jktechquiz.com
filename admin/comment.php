@@ -1,19 +1,17 @@
 <?php
 require("../config.php");
 
-// Pagination variables
+// Pagination
 $limit = 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
-// Fetch comments with pagination using MySQLi
 $sql = "SELECT id, name, email, text, date FROM feedback LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ii", $limit, $offset);
 $stmt->execute();
 $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-// Fetch total number of comments
 $sqlCount = "SELECT COUNT(*) as total FROM feedback";
 $resultCount = $conn->query($sqlCount);
 $row = $resultCount->fetch_assoc();
@@ -45,7 +43,6 @@ $conn->close();
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item px-2"><a class="nav-link" href="adminRole.php"><i class="fa-solid fa-user-tie"></i> Admin</a></li>
                     <li class="nav-item px-2"><a class="nav-link" href="index.php"><i class="fa-solid fa-user"></i> User</a></li>
-                    <li class="nav-item px-2"><a class="nav-link" href="result.php"><i class="fa-solid fa-ranking-star"></i> Result</a></li>
                     <li class="nav-item px-2"><a class="nav-link" href="comment.php"><i class="fa-solid fa-comment"></i> Comment</a></li>
                 </ul>
                 <a class="btn btn-danger" href="logout.php">Logout</a>
@@ -55,20 +52,27 @@ $conn->close();
 
     <div class="container py-5">
         <h2 class="text-center mb-5">Comments</h2>
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center mb-4">
-            <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#deleteAllModal">Delete All Comments</button>
+
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center mb-4 gap-2">
+            <div>
+                <button class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteAllModal">Delete All Comments</button>
+
+            </div>
             <div class="d-flex align-items-center">
                 <input type="date" id="deleteDate" class="form-control d-inline-block w-auto">
                 <button class="btn btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#deleteByDateModal">Delete by Date</button>
             </div>
         </div>
 
-        <div class="row justify-content-center" style="margin-top: 3.125rem;">
+        <div class="row justify-content-center mt-4">
             <div class="col-md-6">
                 <?php if ($result): ?>
                     <?php $counter = $offset + 1; ?>
                     <?php foreach ($result as $value): ?>
-                        <div class="card p-3 text-center shadow" style="margin-bottom: 5.625rem;">
+                        <div class="card p-3 text-center shadow position-relative mb-5">
+                            <div class="form-check position-absolute start-0 top-0 m-2">
+                                <input class="form-check-input delete-checkbox" type="checkbox" value="<?php echo $value['id']; ?>">
+                            </div>
                             <div class="d-flex rounded-circle mx-auto align-items-center justify-content-center text-white fs-3 fw-bold bg-info border border-white border-4" style="width: 4rem; height:4rem; margin-top: -3rem;">
                                 <?php echo $counter++; ?>
                             </div>
@@ -112,8 +116,7 @@ $conn->close();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Confirm Deletion</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Confirm Deletion</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">Are you sure you want to delete this comment?</div>
                 <div class="modal-footer">
@@ -128,8 +131,7 @@ $conn->close();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete All Comments</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Delete All Comments</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">Are you sure you want to delete all comments?</div>
                 <div class="modal-footer">
@@ -144,8 +146,7 @@ $conn->close();
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete Comments by Date</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">Delete Comments by Date</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">Are you sure you want to delete comments from the selected date?</div>
                 <div class="modal-footer">
@@ -155,40 +156,73 @@ $conn->close();
             </div>
         </div>
     </div>
-
     <script>
         let commentId;
-        $(document).ready(function () {
-            $(".delete-btn").click(function () {
+
+        $(document).ready(function() {
+            $(".delete-btn").click(function() {
                 commentId = $(this).data("id");
+                console.log("Selected comment ID:", commentId); // DEBUG line
             });
 
-            $("#confirmDelete").click(function () {
-                $.post("manageComment/deleteComment.php", { id: commentId }, function (response) {
-                    if (response.trim() === "success") location.reload();
-                    else alert("Error deleting comment: " + response);
-                });
-            });
-
-            $("#confirmDeleteAll").click(function () {
-                $.post("manageComment/deleteAllComments.php", function (response) {
-                    if (response.trim() === "success") location.reload();
-                    else alert("Error deleting comments: " + response);
-                });
-            });
-
-            $("#confirmDeleteByDate").click(function () {
-                let date = $("#deleteDate").val();
-                if (date) {
-                    $.post("manageComment/deleteCommentsByDate.php", { date: date }, function (response) {
-                        if (response.trim() === "success") location.reload();
-                        else alert("Error deleting comments: " + response);
-                    });
-                } else {
-                    alert("Please select a date.");
+            $("#confirmDelete").click(function() {
+                console.log("Clicked confirmDelete with ID:", commentId); // DEBUG
+                if (!commentId) {
+                    alert("No comment ID selected!");
+                    return;
                 }
+
+                $.post("manageComment/deleteComment.php", {
+                    id: commentId
+                }, function(response) {
+                    console.log("Server response:", response); // DEBUG
+                    if (response.trim() === "success") {
+                        location.reload();
+                    } else {
+                        alert("Error: " + response);
+                    }
+                }).fail(function() {
+                    alert("AJAX failed to send request.");
+                });
             });
         });
+
+        // Delete All
+        $("#confirmDeleteAll").click(function() {
+            console.log("Triggered Delete All"); // 👈 DEBUG
+            $.post("manageComment/deleteAllComments.php", function(response) {
+                console.log("Response from delete all:", response); // 👈 DEBUG
+                if (response.trim() === "success") location.reload();
+                else alert("Error deleting all comments: " + response);
+            }).fail(function() {
+                alert("AJAX failed for delete all.");
+            });
+        });
+
+        $("#confirmDeleteByDate").click(function() {
+            let date = $("#deleteDate").val();
+            console.log("Clicked delete by date. Selected date:", date); // DEBUG
+
+            if (date) {
+                $.post("manageComment/deleteCommentsByDate.php", {
+                    date: date
+                }, function(response) {
+                    console.log("Server response:", response); // DEBUG
+
+                    if (response.trim() === "success") {
+                        location.reload();
+                    } else {
+                        alert("Error deleting comments: " + response);
+                    }
+                }).fail(function() {
+                    alert("AJAX request failed. Check your network or URL.");
+                });
+            } else {
+                alert("Please select a date.");
+            }
+        });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
