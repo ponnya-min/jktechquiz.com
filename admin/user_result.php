@@ -117,7 +117,7 @@ $resultData = mysqli_stmt_get_result($resultQuery);
                         <p><strong>Last Login:</strong> <?= htmlspecialchars($user['last_login']) ?: 'Never logged in' ?></p>
                     </div>
                 </div>
-               <form method="POST" action="delete_user_from_result.php" onsubmit="return confirm('Are you sure you want to delete this user and all their results?');">
+               <form method="POST" class="mt-3" action="delete_user_from_result.php" onsubmit="return confirm('Are you sure you want to delete this user and all their results?');">
     <input type="hidden" name="user_id" value="<?= $userId ?>">
     <button type="submit" class="btn btn-danger">Delete This User</button>
 </form>
