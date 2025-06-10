@@ -19,7 +19,8 @@ if (!$user) {
 }
 
 // Fetch result
-$resultQuery = mysqli_prepare($conn, "SELECT * FROM result WHERE user_id = ?");
+$resultQuery = mysqli_prepare($conn, "SELECT * FROM result WHERE user_id = ? ORDER BY score ASC");
+
 mysqli_stmt_bind_param($resultQuery, "i", $userId);
 mysqli_stmt_execute($resultQuery);
 $resultData = mysqli_stmt_get_result($resultQuery);
@@ -41,12 +42,12 @@ $resultData = mysqli_stmt_get_result($resultQuery);
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th class="table_title text-center"><input type="checkbox" id="selectAll"></th>
-            <th class="table_title text-center">No</th>
-            <th class="table_title text-center">Quiz Title</th>
-            <th class="table_title text-center">Score</th>
-            <th class="table_title text-center">Date</th>
-            <th class="table_title text-center">Action</th>
+            <th class="admin_bg_color text-center"><input type="checkbox" id="selectAll"></th>
+            <th class="admin_bg_color text-center">No</th>
+            <th class="admin_bg_color text-center">Quiz Title</th>
+            <th class="admin_bg_color text-center">Score</th>
+            <th class="admin_bg_color text-center">Date</th>
+            <th class="admin_bg_color text-center">Action</th>
         </tr>
     </thead>
     <tbody>
