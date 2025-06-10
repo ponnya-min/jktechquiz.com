@@ -6,7 +6,14 @@
     background-color: #48cae4 !important;
     color: white !important;
 }
+<<<<<<< HEAD
 .page-link.outline:focus {
   outline: #48cae4 !important;
   box-shadow: none !important;
 }
+=======
+.page-link.outline{
+  outline: #48cae4 !important;
+  box-shadow: none !important;
+}
+>>>>>>> fed25cd67914251bc326e90f8cfac42fe13bb0e2

@@ -19,7 +19,8 @@ if (!$user) {
 }
 
 // Fetch result
-$resultQuery = mysqli_prepare($conn, "SELECT * FROM result WHERE user_id = ?");
+$resultQuery = mysqli_prepare($conn, "SELECT * FROM result WHERE user_id = ? ORDER BY score ASC");
+
 mysqli_stmt_bind_param($resultQuery, "i", $userId);
 mysqli_stmt_execute($resultQuery);
 $resultData = mysqli_stmt_get_result($resultQuery);
