@@ -133,7 +133,7 @@ $totalPages = ceil($totalRows / $perPage);
                         <th class="admin_bg_color text-center">Last Login Date</th>
                         <th class="admin_bg_color text-center">Last Login</th>
                         <th class="admin_bg_color text-center">Expired</th>
-                        <th class="admin_bg_color text-center">Expired Acc</th>
+                        <th class="admin_bg_color text-center">Action</th>
                         
                     </tr>
                 </thead>
