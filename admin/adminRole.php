@@ -107,11 +107,7 @@ $totalPages = ceil($totalRows / $perPage);
                         <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
                     </li>
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-<<<<<<< HEAD
                         <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-=======
-                        <li class="page-item<?= ($i == $page) ? 'active' : '' ?>">
->>>>>>> fed25cd67914251bc326e90f8cfac42fe13bb0e2
                             <a class="admin_bg_color page-link outline" href="?page=<?= $i ?>"><?= $i ?></a>
                         </li>
                     <?php endfor; ?>

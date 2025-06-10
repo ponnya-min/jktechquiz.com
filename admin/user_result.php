@@ -1,5 +1,12 @@
 <?php
 require_once '../config.php';
+$sort_by = $_GET['sort_by'] ?? 'score';
+$sort_order = strtoupper($_GET['sort_order'] ?? 'ASC');
+$allowed_columns = ['score', 'quiz_date'];
+$allowed_order = ['ASC', 'DESC'];
+
+if (!in_array($sort_by, $allowed_columns)) $sort_by = 'score';
+if (!in_array($sort_order, $allowed_order)) $sort_order = 'ASC';
 
 if (!isset($_GET['id'])) {
     die("User ID not provided.");
@@ -19,7 +26,8 @@ if (!$user) {
 }
 
 // Fetch result
-$resultQuery = mysqli_prepare($conn, "SELECT * FROM result WHERE user_id = ? ORDER BY score ASC");
+$resultQuery = mysqli_prepare($conn, "SELECT * FROM result WHERE user_id = ? ORDER BY $sort_by $sort_order");
+
 
 mysqli_stmt_bind_param($resultQuery, "i", $userId);
 mysqli_stmt_execute($resultQuery);
@@ -38,6 +46,22 @@ $resultData = mysqli_stmt_get_result($resultQuery);
 <body>
     <div class="container mt-4">
         <h3>Results for <?= htmlspecialchars($user['username']) ?></h3>
+        <div class="mb-3">
+    <form method="GET" class="form-inline">
+        <input type="hidden" name="id" value="<?= $userId ?>">
+        <label class="me-2">Sort by:</label>
+        <select name="sort_by" class="form-select d-inline w-auto me-2">
+            <option value="score" <?= $sort_by == 'score' ? 'selected' : '' ?>>Score</option>
+            <option value="quiz_date" <?= $sort_by == 'quiz_date' ? 'selected' : '' ?>>Date</option>
+        </select>
+        <select name="sort_order" class="form-select d-inline w-auto me-2">
+            <option value="ASC" <?= $sort_order == 'ASC' ? 'selected' : '' ?>>Ascending</option>
+            <option value="DESC" <?= $sort_order == 'DESC' ? 'selected' : '' ?>>Descending</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-sm">Sort</button>
+    </form>
+</div>
+
         <form method="POST" action="delete_selected_results.php" id="bulkDeleteForm">
 <table class="table table-striped table-bordered">
     <thead>

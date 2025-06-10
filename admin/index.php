@@ -128,11 +128,11 @@ $totalPages = ceil($totalRows / $perPage);
                     <tr>
                         <th class="admin_bg_color text-center"><input type="checkbox" id="selectAll"></th>
                         <th class="admin_bg_color text-center">No</th>
-                        <th class="admin_bg_color text-center">No</th>
                         <th class="admin_bg_color text-center">Username</th>
                         <th class="admin_bg_color text-center">Email</th>
+                        <th class="admin_bg_color text-center">Last Login Date</th>
                         <th class="admin_bg_color text-center">Last Login</th>
-                        <th class="admin_bg_color text-center">Last Active</th>
+                        <th class="admin_bg_color text-center">Expired</th>
                         <th class="admin_bg_color text-center">Expired Acc</th>
                         
                     </tr>
@@ -253,38 +253,25 @@ $totalPages = ceil($totalRows / $perPage);
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     <!-- Pagination -->
             <nav>
-=======
-    <nav>
->>>>>>> fed25cd67914251bc326e90f8cfac42fe13bb0e2
                 <ul class="pagination justify-content-center">
                     <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
                     </li>
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-<<<<<<< HEAD
                         <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
                             <a class="admin_bg_color page-link outline" href="?page=<?= $i ?>"><?= $i ?></a>
-=======
-                        <li class="page-item<?= ($i == $page) ? 'active' : '' ?>">
-                            <a class="page-link outline admin_btn" href="?page=<?= $i ?>"><?= $i ?></a>
->>>>>>> fed25cd67914251bc326e90f8cfac42fe13bb0e2
                         </li>
                     <?php endfor; ?>
                     <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
                     </li>
                 </ul>
-<<<<<<< HEAD
             </nav>
        
     </div>
 </div>
-=======
-    </nav>
->>>>>>> fed25cd67914251bc326e90f8cfac42fe13bb0e2
     <script>
         function confirmDelete(userId) {
             document.getElementById("deleteUserId").value = userId;
