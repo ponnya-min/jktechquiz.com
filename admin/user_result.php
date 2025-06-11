@@ -46,14 +46,14 @@ $resultData = mysqli_stmt_get_result($resultQuery);
 
 <body>
     <div class="container mt-4">
-        <h3>Results for <?= htmlspecialchars($user['username']) ?></h3>
+        <h3>Results for <i> <?= htmlspecialchars($user['username']) ?> </i> </h3>
         <div class="row">
             <!-- Left Section (3/4 width) -->
             <div class="col-md-9">
                 <div class="mb-3">
-                    <form method="GET" class="form-inline">
+                    <form method="GET" class="d-flex align-items-center">
                         <input type="hidden" name="id" value="<?= $userId ?>">
-                        <label class="me-2">Sort by:</label>
+                        <label class="me-2">Sorted by:</label>
                         <select name="sort_by" class="form-select d-inline w-auto me-2">
                             <option value="score" <?= $sort_by == 'score' ? 'selected' : '' ?>>Score</option>
                             <option value="quiz_date" <?= $sort_by == 'quiz_date' ? 'selected' : '' ?>>Date</option>
@@ -62,7 +62,7 @@ $resultData = mysqli_stmt_get_result($resultQuery);
                             <option value="ASC" <?= $sort_order == 'ASC' ? 'selected' : '' ?>>Ascending</option>
                             <option value="DESC" <?= $sort_order == 'DESC' ? 'selected' : '' ?>>Descending</option>
                         </select>
-                        <button type="submit" class="btn btn-primary btn-sm">Sort</button>
+                        <button type="submit" class="btn admin_btn btn-sm">Sort</button>
                     </form>
                 </div>
 
@@ -108,12 +108,12 @@ $resultData = mysqli_stmt_get_result($resultQuery);
             <!-- Right Section (1/4 width) -->
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header admin_bg_color text-white">
                         User Info
                     </div>
                     <div class="card-body">
-                        <p><strong>Username:</strong> <?= htmlspecialchars($user['username']) ?></p>
-                        <p><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></p>
+                        <p><strong>Username:</strong> <i><?= htmlspecialchars($user['username']) ?></i></p>
+                        <p><strong>Email:</strong> <i><?= htmlspecialchars($user['email']) ?></i></p>
                         <p><strong>Last Login:</strong> <?= htmlspecialchars($user['last_login']) ?: 'Never logged in' ?></p>
                     </div>
                 </div>
