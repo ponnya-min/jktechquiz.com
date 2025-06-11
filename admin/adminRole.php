@@ -35,7 +35,7 @@ $totalPages = ceil($totalRows / $perPage);
 
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#"><img src="img/1-removebg-preview.png" height="60" alt="Logo"></a>
+        <a class="navbar-brand" href="../index.php"><img src="img/1-removebg-preview.png" height="60" alt="Logo"></a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>

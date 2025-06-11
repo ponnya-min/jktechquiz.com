@@ -84,7 +84,7 @@ $totalPages = ceil($totalRows / $perPage);
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container">
-            <a class="navbar-brand" href=""><img alt="logo" height="60" src="img/1-removebg-preview.png" /></a>
+            <a class="navbar-brand" href="../index.php"><img alt="logo" height="60" src="img/1-removebg-preview.png" /></a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -257,7 +257,7 @@ $totalPages = ceil($totalRows / $perPage);
             <nav>
                 <ul class="pagination justify-content-center">
                     <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+                        <a class="page-link text-secondary" href="?page=<?= $page - 1 ?>">Previous</a>
                     </li>
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                         <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
@@ -265,7 +265,7 @@ $totalPages = ceil($totalRows / $perPage);
                         </li>
                     <?php endfor; ?>
                     <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                        <a class="page-link text-secondary" href="?page=<?= $page + 1 ?>">Next</a>
                     </li>
                 </ul>
             </nav>

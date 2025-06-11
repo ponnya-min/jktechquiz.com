@@ -6,14 +6,15 @@
     background-color: #48cae4 !important;
     color: white !important;
 }
-<<<<<<< HEAD
-.page-link.outline:focus {
-  outline: #48cae4 !important;
-  box-shadow: none !important;
+ul.pagination li.page-item.active a.page-link {
+  background-color: #fff !important;
+  border-color: #48cae4 !important;
+  color: #48cae4 !important;
 }
-=======
-.page-link.outline{
-  outline: #48cae4 !important;
-  box-shadow: none !important;
+
+
+.page-item.active .admin_bg_color {
+  background-color: #fff !important;
+  border-color: none !important;
+  color: #48cae4 !important;
 }
->>>>>>> fed25cd67914251bc326e90f8cfac42fe13bb0e2
