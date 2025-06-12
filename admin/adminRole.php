@@ -153,7 +153,7 @@ $totalPages = ceil($totalRows / $perPage);
             <div class="modal-body">Are you sure you want to change this user's role?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="cancelRoleChange" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" id="confirmRoleChange">Confirm</button>
+                <button class="btn admin_btn" id="confirmRoleChange">Confirm</button>
             </div>
         </div>
     </div>
