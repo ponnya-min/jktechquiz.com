@@ -20,6 +20,7 @@ $totalRows = mysqli_fetch_assoc($countResult)['total'];
 $totalPages = ceil($totalRows / $perPage);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -166,65 +167,80 @@ $totalPages = ceil($totalRows / $perPage);
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-let selectedUserId = null;
-let selectedRole = null;
-let previousRole = null;
-let roleSelectElement = null;
+document.addEventListener('DOMContentLoaded', function() {
+  let selectedUserId = null;
+  let selectedRole = null;
+  let previousRole = null;
+  let roleSelectElement = null;
 
-$(document).ready(function () {
-    $(document).on("change", ".roleSelect", function () {
-        selectedUserId = $(this).data("id");
-        selectedRole = $(this).val();
-        previousRole = $(this).data("previous");
-        roleSelectElement = $(this);
+  // Listen for changes on all selects with class 'roleSelect'
+  document.querySelectorAll('.roleSelect').forEach(select => {
+    select.addEventListener('change', function() {
+      selectedUserId = this.dataset.id;
+      selectedRole = this.value;
+      previousRole = this.dataset.previous;
+      roleSelectElement = this;
 
-        new bootstrap.Modal(document.getElementById('confirmRoleChangeModal')).show();
+      // Show the Bootstrap confirmation modal
+      let confirmModal = new bootstrap.Modal(document.getElementById('confirmRoleChangeModal'));
+      confirmModal.show();
     });
+  });
 
-    $("#confirmRoleChange").on("click", function () {
-        $.ajax({
-            url: "manageAdmin/changeRole.php",
-            type: "POST",
-            data: {id: selectedUserId, role: selectedRole},
-            dataType: "json",
-            success: function (response) {
-                if (response.success) {
-                    showToast("success", response.message);
-                    roleSelectElement.data("previous", selectedRole);
-                } else {
-                    showToast("danger", response.error);
-                    roleSelectElement.val(previousRole);
-                }
-                bootstrap.Modal.getInstance(document.getElementById('confirmRoleChangeModal')).hide();
-            },
-            error: function () {
-                showToast("danger", "Error updating role. Please try again.");
-                roleSelectElement.val(previousRole);
-                bootstrap.Modal.getInstance(document.getElementById('confirmRoleChangeModal')).hide();
-            }
-        });
+  // Confirm button click
+  document.getElementById('confirmRoleChange').addEventListener('click', function() {
+    const formData = new URLSearchParams();
+    formData.append('id', selectedUserId);
+    formData.append('role', selectedRole);
+
+    fetch('manageAdmin/changeRole.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: formData.toString()
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        showToast('success', data.message);
+        roleSelectElement.dataset.previous = selectedRole;
+      } else {
+        showToast('danger', data.error);
+        roleSelectElement.value = previousRole; // revert selection
+      }
+      // Hide modal
+      let confirmModalEl = document.getElementById('confirmRoleChangeModal');
+      bootstrap.Modal.getInstance(confirmModalEl).hide();
+    })
+    .catch(() => {
+      showToast('danger', 'Error updating role. Please try again.');
+      roleSelectElement.value = previousRole;
+      let confirmModalEl = document.getElementById('confirmRoleChangeModal');
+      bootstrap.Modal.getInstance(confirmModalEl).hide();
     });
+  });
 
-    $("#cancelRoleChange").on("click", function () {
-        if (roleSelectElement) roleSelectElement.val(previousRole);
-    });
-
-    function showToast(type, message) {
-        let toastEl = $("#toastMessage");
-        toastEl.removeClass("bg-success bg-danger bg-info bg-warning").addClass("bg-" + type);
-        toastEl.find(".toast-body").text(message);
-        toastEl.css("display", "block");
-
-        let toast = new bootstrap.Toast(toastEl[0]);
-        toast.show();
+  // Cancel button click - revert selection
+  document.getElementById('cancelRoleChange').addEventListener('click', function() {
+    if (roleSelectElement) {
+      roleSelectElement.value = previousRole;
     }
-});
+  });
 
-function confirmDelete(adminId) {
-    document.getElementById("deleteAdminId").value = adminId;
-    new bootstrap.Modal(document.getElementById('deleteAdminModal')).show();
-}
+  // Toast notification helper
+  function showToast(type, message) {
+    const toastEl = document.getElementById('toastMessage');
+    toastEl.className = 'toast bg-' + type + ' text-white';
+    toastEl.querySelector('.toast-body').textContent = message;
+    toastEl.style.display = 'block';
+
+    let toast = new bootstrap.Toast(toastEl);
+    toast.show();
+  }
+});
 </script>
+
 
 </body>
 </html>
