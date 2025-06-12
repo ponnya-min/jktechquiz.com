@@ -1,6 +1,10 @@
 <?php
 require_once '../config.php';
 
+// Check if the user is logged in
+include "admin_auth_check.php";
+$isLoggedIn = isset($_SESSION['id']);
+
 $perPage = 8;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
