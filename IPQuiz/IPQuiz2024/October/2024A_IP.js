@@ -20,7 +20,7 @@ const quizData = [
         question: "",
         image: "img/Q(4).png",
         options: ["a) 6", "b) 9", "c) 12", "d) 20"],
-        answer: "d) 9"
+        answer: "b) 9"
     },
     {
         question: "Which of the following is an appropriate description concerning machine language?",
