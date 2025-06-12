@@ -313,9 +313,9 @@ const quizData = [
         options: [
             "a) ESSID",
             "b) S/MIME",
-            "c) SSL ",
+            "c) SSL",
             "d) WPA2"],
-        answer: "d) WPA2 "
+        answer: "d) WPA2"
     },
     {
         question: "Company A implements risk analysis for its own information assets. The results show that if a nearby river overflows, the server room on the first floor of the company might be flooded. The company considers the possibility of moving the server room, but decides there is almost no risk of a flood because the last time the river overflowed was 100 years ago, and the management decides that no particular countermeasures are taken. Which of the following is the risk treatment for information security that Company Aselects?",
