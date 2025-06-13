@@ -86,7 +86,7 @@ $totalPages = ceil($totalRows / $perPage);
                                         data-id="<?= $row['id'] ?>"
                                         data-previous="<?= $row['role'] ?>"
                                         <?= ($row['email'] == 'admin@gmail.com') ? 'disabled' : '' ?>>
-                                    <option value="user" <?= ($row['role'] == "user") ? 'selected' : '' ?>>Sub-Admin</option>
+                                    <option value="user" <?= ($row['role'] == "user") ? 'selected' : '' ?>>User</option>
                                     <option value="admin" <?= ($row['role'] == "admin") ? 'selected' : '' ?>>Admin</option>
                                 </select>
                             </td>
