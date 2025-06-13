@@ -2,6 +2,10 @@
 session_start();
 require_once '../config.php';
 
+require_once "admin_auth_check.php";
+$isLoggedIn = isset($_SESSION['id']);
+
+
 $perPage = 8;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $perPage;
