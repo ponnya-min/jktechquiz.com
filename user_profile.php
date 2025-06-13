@@ -64,6 +64,7 @@ $result = $stmt->get_result(); // Get result
         rel="stylesheet"
         href="./node_modules/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="style/admin.css">
     <link rel="shortcut icon" href="images/TechQUiz.png" type="image/x-icon">
 </head>
 
@@ -141,11 +142,11 @@ $result = $stmt->get_result(); // Get result
 
             <div class="table-responsive mb-5 pb-5">
                 <table class="table mb-5 px-5 mx-auto text-center table-bordered border-dark table-hover" style="width: 43.75rem;">
-                    <thead class="table-dark">
+                    <thead>
                         <tr>
-                            <th scope="col">Quiz Type</th>
-                            <th scope="col">Score</th>
-                            <th scope="col">Exam Date</th>
+                            <th scope="col"  class="table-dark">Quiz Type</th>
+                            <th scope="col"  class="table-dark">Score</th>
+                            <th scope="col"  class="table-dark">Exam Date</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
