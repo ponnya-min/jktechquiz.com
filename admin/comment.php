@@ -1,6 +1,9 @@
 <?php
 require("../config.php");
 
+require_once "admin_auth_check.php";
+$isLoggedIn = isset($_SESSION['id']);
+
 // Pagination
 $limit = 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
