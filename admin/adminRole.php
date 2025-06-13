@@ -29,20 +29,21 @@ $totalPages = ceil($totalRows / $perPage);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="../style/admin.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../style/admin.css">
+    <link rel="stylesheet" href="../main.css" />
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
-        <a class="navbar-brand" href="../index.php"><img src="img/1-removebg-preview.png" height="60" alt="Logo"></a>
+        <a class="navbar-brand me-auto me-sm-auto nav-responsive" href="../index.php"><img src="img/1-removebg-preview.png" width="50" alt="Logo"></a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item px-2"><a class="nav-link" href="adminRole.php"><i class="fa-solid fa-user-tie"></i> Admin</a></li>
+                <li class="nav-item px-2"><a class="nav-link active" href="adminRole.php"><i class="fa-solid fa-user-tie"></i> Admin</a></li>
                 <li class="nav-item px-2"><a class="nav-link" href="index.php"><i class="fa-solid fa-user"></i> User</a></li>  
                 <li class="nav-item px-2"><a class="nav-link" href="comment.php"><i class="fa-solid fa-comment"></i> Comment</a></li>
             </ul>
@@ -52,7 +53,7 @@ $totalPages = ceil($totalRows / $perPage);
 </nav>
 
 <div class="container mt-4">
-    <h3>User Management</h3>
+    <h3>Admin Management</h3>
 
     <?php if (isset($_SESSION['message'])): ?>
         <div class="alert alert-success"><?= $_SESSION['message']; unset($_SESSION['message']); ?></div>
@@ -67,7 +68,7 @@ $totalPages = ceil($totalRows / $perPage);
                 <thead>
                     <tr>
                         <th class="admin_bg_color text-center">No</th>
-                        <th class="admin_bg_color text-center">Username</th>
+                        <th class="admin_bg_color text-center">Admin Name</th>
                         <th class="admin_bg_color text-center">Email</th>
                         <th class="admin_bg_color text-center">Role</th>
                         <th class="admin_bg_color text-center">Action</th>
@@ -85,7 +86,7 @@ $totalPages = ceil($totalRows / $perPage);
                                         data-id="<?= $row['id'] ?>"
                                         data-previous="<?= $row['role'] ?>"
                                         <?= ($row['email'] == 'admin@gmail.com') ? 'disabled' : '' ?>>
-                                    <option value="user" <?= ($row['role'] == "user") ? 'selected' : '' ?>>User</option>
+                                    <option value="user" <?= ($row['role'] == "user") ? 'selected' : '' ?>>Sub-Admin</option>
                                     <option value="admin" <?= ($row['role'] == "admin") ? 'selected' : '' ?>>Admin</option>
                                 </select>
                             </td>
@@ -109,7 +110,7 @@ $totalPages = ceil($totalRows / $perPage);
                     </li>
                     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                         <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-                            <a class="admin_bg_color page-link outline" href="?page=<?= $i ?>"><?= $i ?></a>
+                            <a class="admin_bg_color page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                         </li>
                     <?php endfor; ?>
                     <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
@@ -118,7 +119,7 @@ $totalPages = ceil($totalRows / $perPage);
                 </ul>
             </nav>
         <?php else: ?>
-            <p class="text-center">No users found.</p>
+            <p class="text-center">No admins found.</p>
         <?php endif; ?>
     </div>
 </div>
@@ -151,7 +152,7 @@ $totalPages = ceil($totalRows / $perPage);
                 <h5 class="modal-title">Confirm Role Change</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">Are you sure you want to change this user's role?</div>
+            <div class="modal-body">Are you sure you want to change this person's role?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="cancelRoleChange" data-bs-dismiss="modal">Cancel</button>
                 <button class="btn admin_btn" id="confirmRoleChange">Confirm</button>
