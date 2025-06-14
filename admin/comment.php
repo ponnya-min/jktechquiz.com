@@ -4,6 +4,7 @@ require("../config.php");
 require_once "admin_auth_check.php";
 $isLoggedIn = isset($_SESSION['id']);
 
+
 // Pagination
 $limit = 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -38,7 +39,7 @@ $conn->close();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg bg-light sticky-top fixed-top">
         <div class="container">
             <a class="navbar-brand me-auto me-sm-auto nav-responsive " href="../index.php"><img alt="logo" width="50" src="img/1-removebg-preview.png" /></a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -56,7 +57,7 @@ $conn->close();
     </nav>
 
     <div class="container py-5">
-        <h2 class="text-center mb-5">Comments</h2>
+        <h2 class="text-center mb-5 mt-5" >Comments</h2>
 
         <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center mb-4 gap-2">
             <div>
