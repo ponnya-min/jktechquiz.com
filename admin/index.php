@@ -88,8 +88,9 @@ $totalPages = ceil($totalRows / $perPage);
     <title>User Management</title>
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg bg-light fixed-top">
+
+<body class="with-fixed-navbar">
+    <nav class="navbar navbar-expand-lg bg-light  fixed-top">
         <div class="container">
             <a class="navbar-brand me-auto me-sm-auto nav-responsive " href="../index.php"><img alt="logo" width="50" src="img/1-removebg-preview.png" /></a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -106,9 +107,9 @@ $totalPages = ceil($totalRows / $perPage);
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-5">
         <div class="d-flex flex-column align-items-center mb-2 mx-auto">
-    <h3 class="mb-3">User Table</h3>
+    <h3 class="mb-3 mt-5">User Table</h3>
     
     <div class="d-flex mb-3">
         <form class="d-flex" method="GET">
@@ -130,7 +131,8 @@ $totalPages = ceil($totalRows / $perPage);
 </div>
 
         <form method="POST" action="manageUser/deleteSelectedAcc.php" id="bulkDeleteForm">
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered border-dark mb-5 px-5 mx-auto text-center table-hover ">
+                 
                 <thead>
                     <tr>
                         <th class="admin_bg_color text-center"><input type="checkbox" id="selectAll"></th>
