@@ -89,7 +89,7 @@ $totalPages = ceil($totalRows / $perPage);
 </head>
 
 
-<body class="with-fixed-navbar">
+<body>
     <nav class="navbar navbar-expand-lg bg-light  fixed-top">
         <div class="container">
             <a class="navbar-brand me-auto me-sm-auto nav-responsive " href="../index.php"><img alt="logo" width="50" src="img/1-removebg-preview.png" /></a>
